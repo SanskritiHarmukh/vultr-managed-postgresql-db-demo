@@ -1,0 +1,18 @@
+{
+  "name": "vultr-managed-postgresql-demo",
+  "version": "1.0.0",
+  "description": "Product catalog demo using Vultr Managed PostgreSQL Database",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "setup": "node setup.js"
+  },
+  "keywords": ["vultr", "postgresql", "demo"],
+  "author": "Sanskriti Harmukh",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.11.3",
+    "dotenv": "^16.3.1"
+  }
+}

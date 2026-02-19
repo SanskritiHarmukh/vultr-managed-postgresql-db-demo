@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog - Vultr PostgreSQL Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1>🛍️ Product Catalog</h1>
+                    <p class="subtitle">Powered by Vultr Managed Databases for PostgreSQL</p>
+                </div>
+                <button onclick="openAddModal()" class="btn-primary">+ Add Product</button>
+            </div>
+        </header>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="search-bar">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Search products (full-text search)..." 
+                />
+                <button onclick="searchProducts()" class="btn-search">Search</button>
+                <button onclick="clearSearch()" class="btn-clear-search">Clear</button>
+            </div>
+            
+            <div class="filters">
+                <select id="category-filter" onchange="filterProducts()">
+                    <option value="">All Categories</option>
+                </select>
+                
+                <select id="tag-filter" onchange="filterProducts()">
+                    <option value="">All Tags</option>
+                </select>
+                
+                <select id="brand-filter" onchange="filterByAttribute()">
+                    <option value="">All Brands</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Sony">Sony</option>
+                    <option value="Dell">Dell</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-section">
+            <div id="products-grid" class="products-grid"></div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-overlay" onclick="closeProductModal()"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="modal-title">Add Product</h3>
+                <button class="modal-close" onclick="closeProductModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="product-form">
+                    <div class="form-group">
+                        <label>Product Name *</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select id="product-category" required>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Books">Books</option>
+                                <option value="Clothing">Clothing</option>
+                                <option value="Home">Home</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Price *</label>
+                            <input type="number" id="product-price" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Image URL</label>
+                        <input type="text" id="product-image" placeholder="https://...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Attributes (JSON) - PostgreSQL JSONB</label>
+                        <textarea id="product-attributes" rows="4" placeholder='{"brand": "Apple", "screen": "6.1 inches"}'></textarea>
+                        <small>Enter valid JSON for flexible product attributes</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tags (comma-separated) - PostgreSQL Array</label>
+                        <input type="text" id="product-tags" placeholder="smartphone, premium, apple">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="product-description" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeProductModal()" class="btn-secondary">Cancel</button>
+                <button onclick="saveProduct()" class="btn-primary">Save Product</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="detail-modal">
+        <div class="modal-overlay" onclick="closeDetailModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="detail-name">Product Details</h3>
+                <button class="modal-close" onclick="closeDetailModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="detail-content"></div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeDetailModal()" class="btn-secondary">Close</button>
+                <button onclick="editProductFromDetail()" class="btn-primary">Edit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
