@@ -120,23 +120,22 @@ function renderTagFilter() {
 function filterProducts() {
     const category = document.getElementById('category-filter').value;
     const tag = document.getElementById('tag-filter').value;
-    
+    const brand = document.getElementById('brand-filter').value;
+
     const filters = {};
     if (category) filters.category = category;
     if (tag) filters.tag = tag;
-    
+    if (brand) {
+        filters.attribute = 'brand';
+        filters.attrValue = brand;
+    }
+
     loadProducts(filters);
 }
 
 // Filter by JSON attribute (brand)
 function filterByAttribute() {
-    const brand = document.getElementById('brand-filter').value;
-    
-    if (brand) {
-        loadProducts({ attribute: 'brand', attrValue: brand });
-    } else {
-        loadProducts();
-    }
+    filterProducts();
 }
 
 // Search products (full-text search)
