@@ -217,10 +217,10 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`
-╔══════════════════════════════════════════════════════════════════════╗
-║   🚀 Vultr Managed Databases for PostgreSQL Demo - Product Catalog   ║
-║   📋 http://localhost:${PORT}                                        ║
-╚═══════════════════════════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════════════════════╗
+║   🚀 Vultr Managed Databases for PostgreSQL Demo - Product Catalog       ║
+║   📋 http://localhost:${PORT}                                            ║
+╚══════════════════════════════════════════════════════════════════════════╝
   `);
 });
 
