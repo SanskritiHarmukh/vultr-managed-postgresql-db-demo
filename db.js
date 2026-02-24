@@ -10,12 +10,11 @@ const pool = new Pool({
   ssl: {
     rejectUnauthorized: false
   },
-  max: 10,                    // Maximum number of connections in the pool
-  idleTimeoutMillis: 30000,   // Close idle connections after 30 seconds
-  connectionTimeoutMillis: 10000, // Return an error after 10 seconds if connection can't be established
+  max: 10,                    
+  idleTimeoutMillis: 30000,   
+  connectionTimeoutMillis: 10000, 
 });
 
-// Test connection on startup
 pool.query('SELECT NOW()', (err, res) => {
   if (err) {
     console.error('❌ Failed to connect to PostgreSQL:', err.message);
@@ -24,7 +23,6 @@ pool.query('SELECT NOW()', (err, res) => {
   }
 });
 
-// Handle pool errors
 pool.on('error', (err) => {
   console.error('Unexpected error on idle PostgreSQL client', err);
   process.exit(-1);
